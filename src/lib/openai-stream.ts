@@ -1,10 +1,16 @@
 import { boolean, number, string } from "zod";
 
+import {
+    createParser,
+    ParsedEvent,
+    ReconnectInterval,
+  } from "eventsource-parser";
+
 export type ChatGPTAgent = "user" | "system";
 
 export interface ChatGPTMessage {
   role: ChatGPTAgent;
-  content: string
+  content: string;
 }
 
 export interface OpenAIStreamPayload {
@@ -19,3 +25,26 @@ export interface OpenAIStreamPayload {
     n: number
   }
 
+export async function OpenAIStream(payload: OpenAIStreamPayload) {
+  const encoder = new TextEncoder();
+  const decoder = new TextDecoder();
+
+  let counter = 0;
+
+  const res = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
+    },
+    body: JSON.stringify(payload),
+  })
+
+  const stream = new ReadableStream({
+    async start(controller) {
+      function onParse(event: ParsedEvent | ReconnectInterval) {
+        
+      }
+    }
+  });
+}
