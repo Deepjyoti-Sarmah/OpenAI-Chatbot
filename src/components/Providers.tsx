@@ -14,4 +14,4 @@ const Providers: FC<ProvidersProps> = ({children}) => {
   )
 }
 
-export default Providers
+export default Providers;
