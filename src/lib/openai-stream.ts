@@ -43,7 +43,25 @@ export async function OpenAIStream(payload: OpenAIStreamPayload) {
   const stream = new ReadableStream({
     async start(controller) {
       function onParse(event: ParsedEvent | ReconnectInterval) {
-        
+        if(event.type === 'event') {
+          const data = event.data
+          if(data === '[DONE]') {
+            controller.close();
+            return;
+          }
+          try {
+            const json = JSON.parse(data);
+            console.log("json", json);
+            const text = json.choices[0].delta?.content || '';
+
+            if(counter < 2 && (text.match(/\n/) || []).length) {
+              return;
+            }
+
+          } catch (error) {
+            controller.error(error);
+          }
+        } 
       }
     }
   });
