@@ -20,6 +20,8 @@ export const MessagesContext = createContext<{
 
 export function MessagesProvider({children}: {children: ReactNode}) {
 
+  const [isMessageUpdating, setIsMessageUpdating] = useState<boolean>(false);
+
   const [messages, setMessages] = useState<Message[]>([
     {
       id: nanoid(),
@@ -36,7 +38,7 @@ export function MessagesProvider({children}: {children: ReactNode}) {
     setMessages((prev) => prev.filter((message) => message.id !== id));
   }
   
-  const updateMessage = (id: string updatefn: (prevText: string) => string) => {
+  const updateMessage = (id: string, updatefn: (prevText: string) => string) => {
     setMessages((prev) => prev.map((message)=> {
       if(message.id === id) {
         return {... message, text: updatefn(message.text)};
@@ -50,7 +52,10 @@ export function MessagesProvider({children}: {children: ReactNode}) {
     <MessagesContext.Provider value={{
       messages,
       addMessage,
-      removeMessage
+      removeMessage,
+      updateMessage,
+      isMessageUpdating,
+      setIsMessageUpdating,
     }}> {children} </MessagesContext.Provider>
   )
 }
