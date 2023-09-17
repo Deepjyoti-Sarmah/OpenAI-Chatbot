@@ -6,4 +6,4 @@ const MarkdownLite = () => {
   )
 }
 
-export default MarkdownLite
+export default MarkdownLite;
