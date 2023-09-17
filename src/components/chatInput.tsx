@@ -8,6 +8,7 @@ import {FC, HTMLAttributes, useContext, useRef, useState} from 'react'
 import TextareaAutosize from 'react-textarea-autosize';
 import { MessagesContext } from '@/context/messages';
 import { CornerDownLeft, Loader2 } from 'lucide-react';
+import { toast } from 'react-hot-toast';
 
 interface ChatInputProps extends HTMLAttributes<HTMLDivElement> {}
 
@@ -27,6 +28,11 @@ const chatInput:FC<ChatInputProps> = ({className, ...props}) => {
         },
         body: JSON.stringify({messages: [message]}),
       })
+
+      if(!response.ok) {
+        throw new Error();
+      }
+
       return response.body
     },
     onMutate(message) {
@@ -68,6 +74,11 @@ const chatInput:FC<ChatInputProps> = ({className, ...props}) => {
         textareaRef.current?.focus()
       }, 10)
     },
+    onError(_, message) {
+      toast.error('Something went wrong. Please try again');
+      removeMessage(message.id);
+      textareaRef.current?.focus();
+    }
   })
 
   return (
