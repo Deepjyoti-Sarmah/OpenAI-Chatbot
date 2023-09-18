@@ -22,11 +22,11 @@ export default function Home() {
           <div className='flex lg:flex-1'>
             <a href='#' className='-m-1.5 p-1.5'>
               <span className='sr-only'>Your Company</span>
-              <img
-                className='h-8 w-auto'
-                src='/book.png'
-                alt=''
-              />
+              {/* <img */}
+              {/*   className='h-8 w-auto' */}
+              {/*   src='/book.png' */}
+              {/*   alt='' */}
+              {/* /> */}
             </a>
           </div>
           <div className='flex lg:hidden'>
@@ -141,11 +141,11 @@ export default function Home() {
             </div>
             <div className='mt-16 flow-root sm:mt-24'>
               <div className='relative -m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4'>
-                <img
-                  src='/bookstore2.jpg'
-                  alt='App screenshot'
-                  className='rounded-md shadow-2xl ring-1 ring-gray-900/10'
-                />
+                {/* <img */}
+                {/*   src='/bookstore2.jpg' */}
+                {/*   alt='App screenshot' */}
+                {/*   className='rounded-md shadow-2xl ring-1 ring-gray-900/10' */}
+                {/* /> */}
               </div>
             </div>
           </div>
